@@ -29,7 +29,9 @@
 
 - **URL**
 
-  `/api/product/:id`
+  ```js
+  /api/product/:id
+  ```
 
 - **Method: GET**
 
@@ -37,16 +39,23 @@
 
   **Required:**
   `id=[integer]`
-  `name=[string]`
 
 - **Data Params**
 
-  {name: [string]}
+  ```js
+  {
+    name: [string];
+  }
+  ```
 
 - **Success Response:**
 
   - **Code:** 200 <br />
-  - **Content:** `{ "name": "Generic Steel Computer", "image": null, "price": "276.00", "category": "Automotive", "manufacturer": "Hoppe, Sporer and Fadel", "id": 1, "avgReview": "4.5", "reviewCount": 1428, "isPrime": false }`
+  - **Content:**
+
+  ```js
+  { "name": "Generic Steel Computer", "image": null, "price": "276.00", "category": "Automotive", "manufacturer": "Hoppe, Sporer and Fadel", "id": 1, "avgReview": "4.5", "reviewCount": 1428, "isPrime": false }
+  ```
 
 #### Post Client Click
 
@@ -54,7 +63,9 @@
 
 - **URL**
 
-  `/api/product/:id/:name`
+  ```js
+  /api/product/:id/:name
+  ```
 
 - **Method: POST**
 
@@ -68,7 +79,9 @@
 - **Data Params**
   This id and name pertain to the item which was clicked.
 
-  `{ adId: [integer], name: [string] }`
+  ```js
+  { adId: [integer], name: [string] }
+  ```
 
 - **Success Response:**
 
@@ -81,7 +94,9 @@
 
 - **URL**
 
-  `/api/product/:id/:name`
+  ```js
+  /api/product/:id/:name
+  ```
 
 - **Method: UPDATE**
 
@@ -95,7 +110,9 @@
 - **Data Params**
   This id and name pertain to the item which will no longer be a recommendation, and which item will replace it.
 
-  `{ oldId: [integer], oldName: [string], newId: [integer], newName: [string] }`
+  ```js
+  { oldId: [integer], oldName: [string], newId: [integer], newName: [string] }
+  ```
 
 - **Success Response:**
 
