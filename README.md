@@ -1,42 +1,152 @@
-# Product Advertisement Carousels
+# Product Advertisement Carousel
 
-> This service aims to clone the visual and functional style of Amazon.com's 
-  product carousel modules. The key features to be created are:
-  * Dynamic links to other products
-  * Responsiveness to changing browser width, and mobile screens
-  * Respond to button clicks to scroll through more items
-  Stretch goals for this project are:
-  * smooth animation on button click
-  * rendering multiple kinds of carousels
-  * SVG graphics for product ratings
+> This product page service displays recommended products which are relevant to the currently viewed item. Features include:
+
+- A side-scrolling carousel with links to other products
+- Tightly formatted displays of each product's name, thumbnail, and review data
+- Consistent performance across screen resolutions
+- Scaled and stress-tested database capable of handling webscale traffic
+- API routes for a recommendation optimizer to collect user data and update product recommendations
 
 ## Related Projects
 
-  - https://github.com/amazonians-110/add_to_cart-chris
-  - https://github.com/amazonians-110/product-reviews-victor
-  - https://github.com/amazonians-110/product-gallery-summary
+- https://github.com/marianas-blue/product-gallery.git
+- https://github.com/marianas-blue/product-reviews.git
+- https://github.com/marianas-blue/add-to-cart.git
 
 ## Table of Contents
 
-1. [Usage](#Usage)
-2. [Requirements](#requirements)
-3. [Development](#development)
+1. [API](#API)
+2. [Usage](#Usage)
+3. [Requirements](#requirements)
+4. [Development](#development)
+
+## API
+
+#### Get All Recommendations
+
+> This call fetches information on all recommended products for rendering within the carousel upon page load.
+
+- **URL**
+
+  ```js
+  /api/product/:id
+  ```
+
+- **Method: GET**
+
+- **URL Params**
+
+  **Required:**
+  `id=[integer]`
+
+- **Data Params**
+
+  ```js
+  {
+    name: [string];
+  }
+  ```
+
+- **Success Response:**
+
+  - **Code:** 200 <br />
+  - **Content:**
+
+  ```js
+  { "name": "Generic Steel Computer", "image": null, "price": "276.00", "category": "Automotive", "manufacturer": "Hoppe, Sporer and Fadel", "id": 1, "avgReview": "4.5", "reviewCount": 1428, "isPrime": false }
+  ```
+
+#### Post Client Click
+
+> Upon the client clicking a recommended item, this call sends data about the event to another endpoint for future analysis.
+
+- **URL**
+
+  ```js
+  /api/product/:id/:name
+  ```
+
+- **Method: POST**
+
+- **URL Params**
+
+  **Required:**
+  This id and name pertain to the item currently viewed in browser.
+  `id=[integer]`
+  `name=[string]`
+
+- **Data Params**
+  This id and name pertain to the item which was clicked.
+
+  ```js
+  { adId: [integer], name: [string] }
+  ```
+
+- **Success Response:**
+
+  - **Code:** 201 <br />
+  - **Content:** `"received"`
+
+#### Update Recommendation
+
+> This call allows another endpoint, such as a recommendation optimization server, to update one entry within one product's recommendations to a more relevant item.
+
+- **URL**
+
+  ```js
+  /api/product/:id/:name
+  ```
+
+- **Method: UPDATE**
+
+- **URL Params**
+  This id and name pertain to the item which will receive an updated recommendation.
+
+  **Required:**
+  `id=[integer]`
+  `name=[string]`
+
+- **Data Params**
+  This id and name pertain to the item which will no longer be a recommendation, and which item will replace it.
+
+  ```js
+  { oldId: [integer], oldName: [string], newId: [integer], newName: [string] }
+  ```
+
+- **Success Response:**
+
+  - **Code:** 204 <br />
+  - **Content:** `[empty response]`
+
+---
 
 ## Usage
 
-> To run this code on your computer you will need to:
-  1) run 'npm i' from the command line
-  2) run 'npm start'
-  
 ## Requirements
 
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
+1. Node v8.0 +
+2. npm
+3. postgreSQL
 
-- Node 6.13.0
-- npm 6.4.1
+## Installing Dependencies
+
+```sh
+npm install
+```
 
 ## Development
 
-### Installing Dependencies
+To run this program on your computer for development:
 
-none
+```sh
+npm run seed
+npm run dev-build
+npm run dev-start
+```
+
+To build for production:
+
+```sh
+npm start
+```

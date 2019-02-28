@@ -12,16 +12,15 @@ class App extends React.Component {
       products: [],
       pageNumber: 1,
       pages: null,
-      productsPerPage: null,
+      productsPerPage: null
     };
   }
 
   componentWillMount() {
-    this.fetchProducts()
-      .then(() => {
-        this.updateWidth();
-        window.addEventListener('resize', this.updateWidth.bind(this));
-      });
+    this.fetchProducts().then(() => {
+      this.updateWidth();
+      window.addEventListener('resize', this.updateWidth.bind(this));
+    });
   }
 
   updateWidth() {
@@ -33,12 +32,12 @@ class App extends React.Component {
         return {
           productsPerPage,
           pages,
-          pageNumber: pages,
+          pageNumber: pages
         };
       }
       return {
         productsPerPage,
-        pages,
+        pages
       };
     });
   }
@@ -47,7 +46,8 @@ class App extends React.Component {
   fetchProducts() {
     const { pathname } = window.location;
     const productNumber = pathname.split('/').pop();
-    return axios.get(`http://ec2-18-217-74-134.us-east-2.compute.amazonaws.com/api/products/${productNumber}`)
+    return axios
+      .get(`/api/products/${productNumber}`)
       .then(({ data }) => {
         this.setState({ products: data });
       })
@@ -73,25 +73,22 @@ class App extends React.Component {
 
   render() {
     const {
-      products, relationship, pageNumber, pages, productsPerPage,
+      products,
+      relationship,
+      pageNumber,
+      pages,
+      productsPerPage
     } = this.state;
     const firstIndex = productsPerPage * (pageNumber - 1);
     const lastIndex = productsPerPage * pageNumber;
     return (
       <section className={app.section}>
         <header className={app.header}>
-          <h4 className={app.title}>
-            {relationship}
-          </h4>
-          <h4 className={app.pages}>
-            {`Page ${pageNumber} of ${pages}`}
-          </h4>
+          <h4 className={app.title}>{relationship}</h4>
+          <h4 className={app.pages}>{`Page ${pageNumber} of ${pages}`}</h4>
         </header>
         <Carousel
-          products={products
-            ? products.slice(firstIndex, lastIndex)
-            : []
-          }
+          products={products ? products.slice(firstIndex, lastIndex) : []}
           click={this.handleClick}
           scroll={this.handleScroll}
         />
