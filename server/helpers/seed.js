@@ -7,7 +7,7 @@ for (let i = 0; i <= 105; i++) {
   random.push(Math.abs(Math.random() - Math.random()));
 }
 
-for (let i = 1; i <= 50; i++) {
+for (let i = 1; i <= 200; i++) {
   let data = [];
   var reviews = [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0];
 
