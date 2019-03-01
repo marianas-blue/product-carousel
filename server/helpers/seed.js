@@ -29,5 +29,13 @@ fs.writeFile(
   err => {
     if (err) throw err;
     console.log('saved!');
+    fs.readFile(
+      path.resolve(__dirname, 'data/testCSV'),
+      'utf-8',
+      (err, data) => {
+        if (err) throw err;
+        console.log(data);
+      }
+    );
   }
 );
