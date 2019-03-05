@@ -5,9 +5,9 @@ const { formatCSV } = require('./formatCSV.js');
 
 const saveData = () => {
   let i = 1;
-  const numberOfRecords = 1000000;
+  const numberOfRecords = 10000000;
   const file = fs.createWriteStream(
-    path.resolve(__dirname, 'data/products.csv')
+    path.resolve(__dirname, '../data/postgreSQL/products.csv')
   );
 
   const writeData = () => {
@@ -34,31 +34,21 @@ const saveData = () => {
     };
 
     while (i <= numberOfRecords && result) {
-      const data = [];
       const product = {};
 
       product.id = i;
       product.name = 'Product ' + i;
       product.category = generateCategory(i % 100);
       product.price = Math.round(random[i % 100] * 100 + 5) + '.00';
-      product.avg_review = reviews[Math.round(9 - random[(i % 100) - 1] * 9)];
+      product.avg_review = reviews[Math.round(9 - random[i % 100] * 9)];
       product.review_count = Math.round(random[(i % 100) + 1] * 300);
-      product.is_prime = random[i % 100] < 0.5 ? true : false;
+      product.is_prime = random[i % 100] < 0.35 ? true : false;
       product.image = faker.image.imageUrl();
       product.manufacturer = faker.company.companyName();
-      const recs = [];
-      for (let k = 0; k < 20; k++) {
-        recs.push(Math.floor(random[(i + k) % 100] * 10000000));
-      }
-      product.recs = recs;
 
-      let csvProduct = formatCSV(product, i);
-      if (i === 1) {
-        csvProduct += '\n' + formatCSV(product, i + 1);
-      }
+      let csvProduct = formatCSV(product);
 
-      data.push(csvProduct);
-      result = file.write(data + '\n');
+      result = file.write(csvProduct + '\n');
       i++;
     }
 

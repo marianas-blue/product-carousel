@@ -1,4 +1,4 @@
-const database = require('../../config.js');
+const database = require('../../../../config.js');
 
 const generateRelationships = (n, id) => {
   // have a target product
@@ -13,12 +13,14 @@ const generateRelationships = (n, id) => {
   return results;
 };
 
-
-database.schema.dropTableIfExists('products_index')
-  .then(() => database.schema.createTable('products_index', (table) => {
-    table.integer('product_id');
-    table.integer('related_id');
-  }))
+database.schema
+  .dropTableIfExists('products_index')
+  .then(() =>
+    database.schema.createTable('products_index', table => {
+      table.integer('product_id');
+      table.integer('related_id');
+    })
+  )
   .then(() => {
     const rows = [];
     for (let i = 0; i < 100; i += 1) {
@@ -26,7 +28,7 @@ database.schema.dropTableIfExists('products_index')
       for (let k = 0; k < relations.length; k += 1) {
         rows.push({
           product_id: i + 1,
-          related_id: relations[k],
+          related_id: relations[k]
         });
       }
     }
@@ -35,6 +37,6 @@ database.schema.dropTableIfExists('products_index')
   .then(() => {
     process.exit();
   })
-  .catch((err) => {
-    throw (err);
+  .catch(err => {
+    throw err;
   });
