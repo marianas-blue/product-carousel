@@ -1,7 +1,6 @@
 const fs = require('fs');
 const faker = require('faker');
 const path = require('path');
-const { formatCSV } = require('./formatCSV.js');
 
 const saveData = () => {
   let i = 1;
@@ -34,7 +33,6 @@ const saveData = () => {
     };
 
     while (i <= numberOfRecords && result) {
-      // const data = [];
       const product = {};
 
       product.id = i;
@@ -51,13 +49,6 @@ const saveData = () => {
         recs.push(Math.floor(random[(i + k) % 100] * 10000000));
       }
       product.recs = recs;
-
-      // let csvProduct = formatCSV(product, i);
-      // if (i === 1) {
-      //   csvProduct += '\n' + formatCSV(product, i + 1);
-      // }
-
-      // data.push(product);
       result = file.write(JSON.stringify(product) + '\n');
       i++;
     }
