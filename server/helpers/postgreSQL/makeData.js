@@ -5,7 +5,7 @@ const { formatCSV } = require('./formatCSV.js');
 
 const saveData = () => {
   let i = 1;
-  const numberOfRecords = 404;
+  const numberOfRecords = 10000000;
   const file = fs.createWriteStream(
     path.resolve(__dirname, '../data/postgreSQL/products.csv')
   );
