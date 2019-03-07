@@ -5,10 +5,18 @@ const getRecs = async (req, res) => {
   const { name } = req.query;
 
   const data = await selectRecs(id, name);
+
   data.forEach(item => {
-    const avgReview = item.avg_review;
+    item['avgReview'] = item.avg_review.toString();
     delete item.avg_review;
-    item['avgReview'] = avgReview;
+
+    item.price = item.price.toString();
+
+    item['isPrime'] = item.is_prime;
+    delete item.is_prime;
+
+    item['reviewCount'] = item.review_count;
+    delete item.review_count;
   });
 
   res.status(200).send(data);
