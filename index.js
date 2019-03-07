@@ -2,34 +2,27 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const compression = require('compression');
-const router = require('./server/controllers/router.js');
+const PORT = 3007;
+const {
+  getRecs,
+  updateRec,
+  postClick
+} = require('./server/controllers/routes.js');
 
 const app = express();
 
-app.use(morgan('tiny'));
-
+app.use(morgan('dev'));
 app.use(cors());
-
 app.use(compression());
+app.use(express.static(__dirname + '/dist'));
 
-app.get('/api/bundle.js', (req, res) => {
-  res.sendFile(`${__dirname}/dist/bundle.js`);
+app.get('/api/products/:id', (req, res) => {
+  getRecs(req, res);
 });
 
-app.get('/api/bundle', (req, res) => {
-  res.sendFile(`${__dirname}/dist/bundle.js`);
-});
+// app.post();
 
-app.use(express.static(`${__dirname}/dist`));
+// app.update();
 
-app.get('/api/products/:productId/', router.readRelationship);
-
-app.get('/products/:id', (req, res) => {
-  res.sendFile(`${__dirname}/dist/index.html`);
-});
-
-app.get('*', (req, res) => {
-  res.redirect('/products/1');
-});
-
-app.listen(3007, console.log('listening to 3007'));
+app.use('/:id', express.static(__dirname + '/dist'));
+app.listen(PORT, console.log(`listening at port ${PORT}`));
