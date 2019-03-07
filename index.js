@@ -20,9 +20,13 @@ app.get('/api/products/:id', (req, res) => {
   getRecs(req, res);
 });
 
-// app.post();
+app.put('/api/products/:id', (req, res) => {
+  updateRec(req, res);
+});
 
-// app.update();
+app.post('/api/products/:id', (req, res) => {
+  postClick(req, res);
+});
 
 app.use('/:id', express.static(__dirname + '/dist'));
 app.listen(PORT, console.log(`listening at port ${PORT}`));

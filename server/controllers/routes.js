@@ -22,17 +22,19 @@ const getRecs = async (req, res) => {
   res.status(200).send(data);
 };
 
-const updateRec = (req, res) => {
-  const callback = (err, data) => {
-    if (err) throw err;
-    res.sendStatus(204);
-  };
-  // setRec(callback);
+const updateRec = async (req, res) => {
+  const { id } = req.params;
+  const { name, oldId, oldName, newId, newName } = req.query;
+
+  await setRec(id, oldId, newId);
+  res.sendStatus(204);
 };
 
 const postClick = (req, res) => {
-  // This is where client data would be sent to another server, to optimize product recommendations.
-  res.status(201).send(data);
+  const { id } = req.params;
+  const { name, adId, adName } = req.query;
+  // This is where client data would be sent to another server after a recommended product was clicked, to optimize product recommendations.
+  res.sendStatus(201);
 };
 
 module.exports.getRecs = getRecs;

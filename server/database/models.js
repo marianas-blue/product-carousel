@@ -16,7 +16,18 @@ const selectRecs = async (id, name) => {
     .catch(e => console.error(e.stack));
 };
 
-const setRec = () => {};
+const setRec = (id, oldId, newId) => {
+  client.connect().catch(e => console.error(e.stack));
+  return client
+    .query(
+      `UPDATE recs SET rec_id = ${newId} WHERE product_id = ${id} AND rec_id = ${oldId};`
+    )
+    .then(res => {
+      client.end();
+      return res.rows;
+    })
+    .catch(e => console.error(e.stack));
+};
 
 module.exports.selectRecs = selectRecs;
 module.exports.setRec = setRec;
