@@ -45,7 +45,8 @@ class App extends React.Component {
 
   fetchProducts() {
     const { pathname } = window.location;
-    const productNumber = pathname.split('/')[1];
+    let productNumber = pathname.split('/')[1];
+    productNumber = productNumber || 1;
     const productName = { name: `Product ${productNumber}` };
     return axios
       .get(`/api/products/${productNumber}`, { params: productName })
