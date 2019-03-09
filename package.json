@@ -37,7 +37,9 @@
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
+    "artillery": "^1.6.0-27",
     "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
     "compression": "^1.7.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
@@ -45,8 +47,9 @@
     "knex": "^0.16.3",
     "mongoose": "^5.4.16",
     "morgan": "^1.9.1",
+    "newrelic": "^5.6.0",
     "nodemon": "^1.18.9",
-    "pg": "^7.8.0",
+    "pg": "^7.8.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.1",
     "react-dom": "^16.8.1"

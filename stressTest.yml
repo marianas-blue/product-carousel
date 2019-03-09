@@ -1,0 +1,22 @@
+config:
+  target: 'http://localhost:3007'
+  phases:
+    - duration: 180
+      arrivalRate: 700
+scenarios:
+  - name: 'GET all recommended products'
+    weight: 90
+    flow:
+      - get:
+          url: '/api/products/{{$randomNumber(1, 10000000)}}'
+  # - name: 'POST all recommended products'
+  #   weight: 10
+  #   flow:
+  #     - post:
+  #         url: '/api/products/{{$randomNumber(1, 10000000)}}'
+  #         json:
+  #           name: 'Product + {{$randomNumber(1, 10000000)}}'
+  #           oldId: '{{$randomNumber(1, 10000000)}}'
+  #           oldName: 'Product {{$randomNumber(1, 10000000)}}'
+  #           newId: '{{$randomNumber(1, 10000000)}}'
+  #           newName: 'Product {{$randomNumber(1, 10000000)}}'

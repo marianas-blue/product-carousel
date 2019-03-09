@@ -30,7 +30,7 @@
 - **URL**
 
   ```js
-  /api/product/:id
+  /api/products/:id
   ```
 
 - **Method: GET**
@@ -64,7 +64,7 @@
 - **URL**
 
   ```js
-  /api/product/:id/:name
+  /api/products/:id
   ```
 
 - **Method: POST**
@@ -74,19 +74,18 @@
   **Required:**
   This id and name pertain to the item currently viewed in browser.
   `id=[integer]`
-  `name=[string]`
 
 - **Data Params**
   This id and name pertain to the item which was clicked.
 
   ```js
-  { adId: [integer], name: [string] }
+  { name: [string], adId: [integer], adName: [string] }
   ```
 
 - **Success Response:**
 
   - **Code:** 201 <br />
-  - **Content:** `"received"`
+  - **Content:** `"Created"`
 
 #### Update Recommendation
 
@@ -95,7 +94,7 @@
 - **URL**
 
   ```js
-  /api/product/:id/:name
+  /api/products/:id
   ```
 
 - **Method: UPDATE**
@@ -105,13 +104,12 @@
 
   **Required:**
   `id=[integer]`
-  `name=[string]`
 
 - **Data Params**
   This id and name pertain to the item which will no longer be a recommendation, and which item will replace it.
 
   ```js
-  { oldId: [integer], oldName: [string], newId: [integer], newName: [string] }
+  { name: [string], oldId: [integer], oldName: [string], newId: [integer], newName: [string] }
   ```
 
 - **Success Response:**

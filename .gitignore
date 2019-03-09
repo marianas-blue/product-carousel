@@ -2,4 +2,6 @@
 /dist
 config.js
 npm-debug.log
+newrelic.js
+newrelic_agent.log
 /server/helpers/data/*
