@@ -1,8 +1,7 @@
 const pg = require('pg');
 const dbString = require('../../config');
 
-const client = new pg.Client(dbString);
-client.connect();
+const client = new pg.Pool(dbString);
 
 const selectRecs = async (id, name) => {
   return client
