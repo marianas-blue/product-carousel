@@ -13,7 +13,7 @@ const Product = ({
   product: { id, name, avgReview, price, isPrime, reviewCount, image }
 }) => (
   <div className={product.column}>
-    <a href={`/products/${id}`}>
+    <a href={`/${id}`}>
       <div className={product.ad_image}>
         <div
           style={{
