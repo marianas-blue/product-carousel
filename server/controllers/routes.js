@@ -24,7 +24,11 @@ const getRecs = async (req, res) => {
 
 const updateRec = async (req, res) => {
   const { id } = req.params;
-  const { name, oldId, oldName, newId, newName } = req.query;
+  if (req.body) {
+    const {name, oldId, oldName, newId, newName } = req.body;
+  } else {
+    const { name, oldId, oldName, newId, newName } = req.query;
+  }
 
   await setRec(id, oldId, newId);
   res.sendStatus(204);
