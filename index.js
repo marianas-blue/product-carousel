@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const compression = require('compression');
-const PORT = 3007;
+const PORT = 80;
 const {
   getRecs,
   updateRec,
