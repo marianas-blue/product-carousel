@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const compression = require('compression');
-const PORT = 80;
+const PORT = 3007;
 const {
   getRecs,
   updateRec,
@@ -15,7 +15,6 @@ const app = express();
 
 app.use(cors());
 app.use(compression());
-app.use(bodyParser.json());
 app.use(express.static(__dirname + '/dist'));
 
 app.get('/api/products/:id', (req, res) => {
